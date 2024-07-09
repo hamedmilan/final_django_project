@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load website_tags %}
 
 {% block content %}
 <section id="homeIntro" class="parallax first-widget">
@@ -351,60 +352,6 @@
 	</div> <!-- /.team-members -->
 </section> <!-- /.our-team -->
 
-<section id="blogPosts" class="parallax">
-	<div class="parallax-overlay">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="section-header">
-						<h2 class="section-title">Recent from our blog</h2>
-						<p class="section-desc">Everything you need to create a professional website.</p>
-					</div> <!-- /.section-header -->
-				</div> <!-- /.col-md-12 -->
-			</div> <!-- /.row -->
-			<div class="row latest-posts">
-				<div class="col-md-4 col-sm-6">
-					<div class="blog-post clearfix">
-						<div class="thumb-post">
-							<a href="blog-single.html"><img src="{% static 'images/includes/blogthumb1.jpg' %}" alt=""
-									class="img-circle"></a>
-						</div>
-						<div class="blog-post-content">
-							<h4 class="post-title"><a href="blog-single.html">Getting Creative With the Google Maps
-									API</a></h4>
-							<span class="meta-post-date">12 February 2084</span>
-						</div>
-					</div> <!-- /.blog-post -->
-				</div> <!-- /.col-md-4 -->
-				<div class="col-md-4 col-sm-6">
-					<div class="blog-post clearfix">
-						<div class="thumb-post">
-							<a href="blog-single.html"><img src="{% static 'images/includes/blogthumb2.jpg' %}" alt=""
-									class="img-circle"></a>
-						</div>
-						<div class="blog-post-content">
-							<h4 class="post-title"><a href="blog-single.html">Design Deliverables – easily share
-									project</a></h4>
-							<span class="meta-post-date">10 February 2084</span>
-						</div>
-					</div> <!-- /.blog-post -->
-				</div> <!-- /.col-md-4 -->
-				<div class="col-md-4 col-sm-6">
-					<div class="blog-post clearfix">
-						<div class="thumb-post">
-							<a href="blog-single.html"><img src="{% static 'images/includes/blogthumb3.jpg' %}" alt=""
-									class="img-circle"></a>
-						</div>
-						<div class="blog-post-content">
-							<h4 class="post-title"><a href="blog-single.html">Using Templates to Get Your Clients
-									Thinking</a></h4>
-							<span class="meta-post-date">8 February 2084</span>
-						</div>
-					</div> <!-- /.blog-post -->
-				</div> <!-- /.col-md-4 -->
-			</div> <!-- /.row -->
-		</div> <!-- /.container -->
-	</div> <!-- /.parallax-overlay -->
-</section> <!-- /#blogPosts -->
+{% index_recentposts %}
 
 {% endblock %}

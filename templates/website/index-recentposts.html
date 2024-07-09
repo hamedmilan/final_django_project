@@ -1,0 +1,35 @@
+{% load static %}
+{% load website_tags %}
+<section id="blogPosts" class="parallax">
+    <div class="parallax-overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-header">
+                        <h2 class="section-title">Recent from our blog</h2>
+                        <p class="section-desc">Everything you need to create a professional website.</p>
+                    </div> <!-- /.section-header -->
+                </div> <!-- /.col-md-12 -->
+            </div> <!-- /.row -->
+            <div class="row latest-posts">
+                {% for post in posts %}
+                {% check_thumbnail post as temp %}
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="blog-post clearfix">
+                        <div class="thumb-post">
+                            <a href="{% url 'blog:single' post.id %}"><img src="{{post.image_thumbnail.url}}" alt=""
+                                    class="img-circle"></a>
+                        </div>
+                        <div class="blog-post-content">
+                            <h4 class="post-title"><a href="{% url 'blog:single' post.id %}">{{post.title|safe|truncatewords:4}}</a></h4>
+                            <span class="meta-post-date">{{post.published_date|date:"d M Y"}}</span>
+                        </div>
+                    </div> <!-- /.blog-post -->
+                </div> <!-- /.col-md-4 -->
+                {% endfor %}
+
+            </div> <!-- /.row -->
+        </div> <!-- /.container -->
+    </div> <!-- /.parallax-overlay -->
+</section> <!-- /#blogPosts -->

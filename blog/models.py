@@ -35,8 +35,24 @@ class Post(models.Model):
 
         # Open the original image
         img = Image.open(self.image.path)
+
+        # Get dimensions
+        width, height = img.size
+        
+        # Determine the size of the square
+        min_dim = min(width, height)
+
+        # Calculate coordinates to crop the image to a square from the center
+        left = (width - min_dim) // 2
+        top = (height - min_dim) // 2
+        right = (width + min_dim) // 2
+        bottom = (height + min_dim) // 2
+
+        # Crop the image to a square from the center
+        img = img.crop((left, top, right, bottom))
+
         # Define thumbnail size
-        size = (125, 125)
+        size = (80, 80)
         img.thumbnail(size)
 
 
@@ -46,7 +62,6 @@ class Post(models.Model):
         thumb_path = os.path.join(thumb_filename)
 
         full_thumb_path = os.path.join(settings.MEDIA_ROOT, thumb_path)
-        print(thumb_path)
 
         # Save the thumbnail to the filesystem
         img.save(full_thumb_path, 'JPEG', quality=95)

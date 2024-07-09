@@ -1,0 +1,9 @@
+{% load static %}
+{% load website_tags %}
+<h3 class="archive-title">Latest 10 Posts</h3>
+<ul class="archive-list">
+    {% for post in posts %}
+    <li><a href="{% url 'blog:single' post.id %}">{{post.title}}</a></li>
+    {% endfor %}
+
+</ul>

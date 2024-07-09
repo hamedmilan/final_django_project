@@ -1,0 +1,9 @@
+{% load static %}
+{% load website_tags %}
+<h3 class="archive-title">Archives by Categories:</h3>
+<ul class="archive-list">
+    {% for name, count in categories.items %}
+    <li><a href="{% url 'blog:category' cat_name=name%}">{{name}} ({{count}})</a></li>
+    {% endfor %}
+
+</ul>

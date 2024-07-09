@@ -5,14 +5,14 @@
     {% for post in posts %}
     <div class="last-post clearfix">
         <div class="thumb pull-left">
-            {% check_thumbnail post  as temp %}
+            {% check_thumbnail post as temp %}
 
-            <a href="#"><img src="{{post.image_thumbnail.url}}" alt=""></a>
+            <a href="{% url 'blog:single' post.id %}"><img src="{{post.image_thumbnail.url}}" alt=""></a>
 
         </div>
         <div class="content">
             <span>{{post.published_date|date:"d M Y"}}</span>
-            <h4><a href="#">{{post.title|safe|truncatewords:4}}</a></h4>
+            <h4><a href="{% url 'blog:single' post.id %}">{{post.title|safe|truncatewords:4}}</a></h4>
         </div>
     </div> <!-- /.last-post -->
     {% endfor %}

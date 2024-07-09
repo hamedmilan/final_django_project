@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load blog_tags %}
 
 {% block content %}
 <div class="first-widget parallax" id="contact">
@@ -40,8 +41,9 @@
 					<div class="contact-form">
 						<h3>Send a Direct Message</h3>
 						<div class="widget-inner">
-							<form action="#" method="post" id="contact-form">
+							<form id="contact-form" action="{% url 'website:contact' %}" method="post">
 								<div class="row">
+									{% csrf_token %}
 									<div class="col-md-4">
 										<p>
 											<label for="name">Your Name:</label>
@@ -51,7 +53,7 @@
 									<div class="col-md-4">
 										<p>
 											<label for="email">Email Address:</label>
-											<input type="text" name="email" id="email">
+											<input type="email" name="email" id="email">
 										</p>
 									</div>
 									<div class="col-md-4">
@@ -74,9 +76,18 @@
 										<button class="mainBtn" id="submit">Send Message</button>
 									</div>
 								</div>
+
 								<div class="row">
 									<div class="col-md-12">
-										<div id="result"></div>
+										<div id="result">
+											{% if messages %}
+											<ul class="messages">
+												{% for message in messages %}
+												<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+												{% endfor %}
+											</ul>
+											{% endif %}
+										</div>
 									</div> <!-- /.col-md-12 -->
 								</div> <!-- /.row -->
 							</form>
@@ -88,55 +99,8 @@
 
 		<div class="col-md-4">
 			<div class="sidebar">
-				<div class="sidebar-widget">
-					<h5 class="widget-title">Recent Posts</h5>
-					<div class="last-post clearfix">
-						<div class="thumb pull-left">
-							<a href="#"><img src="{% static 'images/includes/blogthumb1.jpg' %}" alt=""></a>
-						</div>
-						<div class="content">
-							<span>24 February 2084</span>
-							<h4><a href="#">Standard Post Formating Medigo</a></h4>
-						</div>
-					</div> <!-- /.last-post -->
-					<div class="last-post clearfix">
-						<div class="thumb pull-left">
-							<a href="#"><img src="{% static 'images/includes/blogthumb2.jpg' %}" alt=""></a>
-						</div>
-						<div class="content">
-							<span>24 February 2084</span>
-							<h4><a href="#">Standard Post Formating Medigo</a></h4>
-						</div>
-					</div> <!-- /.last-post -->
-					<div class="last-post clearfix">
-						<div class="thumb pull-left">
-							<a href="#"><img src="{% static 'images/includes/blogthumb3.jpg' %}" alt=""></a>
-						</div>
-						<div class="content">
-							<span>24 February 2084</span>
-							<h4><a href="#">Standard Post Formating Medigo</a></h4>
-						</div>
-					</div> <!-- /.last-post -->
-				</div> <!-- /.sidebar-widget -->
-				<div class="sidebar-widget">
-					<h5 class="widget-title">Categories</h5>
-					<div class="row categories">
-						<div class="col-md-6">
-							<ul>
-								<li><a href="#">Standard</a></li>
-								<li><a href="#">Audio</a></li>
-								<li><a href="#">Video</a></li>
-								<li><a href="#">Branding</a></li>
-							</ul>
-						</div>
-						<div class="col-md-6">
-							<ul>
-								<li><a href="#">iOS Design</a></li>
-								<li><a href="#">Business</a></li>
-							</ul>
-						</div>
-					</div> <!-- /.row -->
-				</div> <!-- /.sidebar-widget -->
+				{% recentposts 3 %}
+				{% categories %}
 				<div class="sidebar-widget">
 					<h5 class="widget-title">Flickr Feed</h5>
 					<ul id="flickr-feed" class="thumbs"></ul>
